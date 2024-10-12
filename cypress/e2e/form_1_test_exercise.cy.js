@@ -15,14 +15,14 @@ Tasks done during VS Code live demo:
 
 describe('This is first test suite, Lauri Kasvand', () => {
     it('User can submit data only when valid mandatory values are added', () => {
+        cy.get('input[name="password"]').type('Lumitulimahajavalgeksläksmaa')
+        cy.get('[name="confirm"]').type('Lumitulimahajavalgeksläksmaa')
         cy.get('#username').type('Something')
-        cy.get('[data-testid="phoneNumberTestId"]').type('10203040')
-        cy.get('input[name="password"]').type('MyPass123')
-        cy.get('[name="confirm"]').type('MyPass123')
-        //in order to activate submit button, user has to click somewhere outside the input field
+        cy.get('#firstName').type(firstName)
+        cy.get('#lastName').type(lastName)
+        cy.get('[data-testid="phoneNumberTestId"]').type('555666777')
         cy.get('h2').contains('Password').click()
-
-        cy.get('.submit_button').should('be.enabled');
+        cy.get('.submit_button').should('be.enabled')
         cy.get('.submit_button').click()
 
         // Assert that both input and password error messages are not shown

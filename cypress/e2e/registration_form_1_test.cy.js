@@ -113,6 +113,7 @@ describe('This is first test suite, Lauri Kasvand', () => {
         cy.get('[data-testid="phoneNumberTestId"]').type(phoneNumber)
         cy.get("input[name='password']").type('Password')
         cy.get('[name="confirm"]').type('Password')
+        
 
         // Scroll back to phone number input field
         cy.get('#phoneNumber').scrollIntoView()
@@ -143,7 +144,9 @@ describe('This is first test suite, Lauri Kasvand', () => {
         // Assert that submit button is not enabled and that successful message is not visible
         cy.get('#username').type(userName)
         cy.get('[data-testid="phoneNumberTestId"]').type(phoneNumber)
-        // cy.get("input[name='password']").type('Password')
+        cy.get('#firstName').type(firstName)
+        cy.get('#lastName').type(lastName)
+        //type only confirmation password
         cy.get('[name="confirm"]').type('Password')
 
         // Asserting that Submit button is disabled
@@ -154,17 +157,16 @@ describe('This is first test suite, Lauri Kasvand', () => {
     })
 
     it('User cannot add letters to phone number', () => {
-        // Next verification is given as example
-        // how we can check from html code, that phone number should contain only numbers
-        cy.get('[data-testid="phoneNumberTestId"]').should('have.attr', 'type', 'number')
-
-        // Add steps, when all fields are correctly filled in, except phone number
-        // Try typing letters to phone number field
-        // Assert that submit button is not enabled and that successful message is not visible
+ 
         cy.get('#username').type(userName)
-        cy.get('[data-testid="phoneNumberTestId"]').type('Cerebrum')
+        cy.get('#firstName').type(firstName)
+        cy.get('#lastName').type(lastName)
+   
         cy.get("input[name='password']").type('Password')
         cy.get('[name="confirm"]').type('Password')
+
+        cy.get('[data-testid="phoneNumberTestId"]').should('have.attr', 'type', 'number')
+        cy.get('[data-testid="phoneNumberTestId"]').type('Cerebrum')
 
         // Asserting that Submit button is disabled
         cy.get('.submit_button').should('be.disabled')
